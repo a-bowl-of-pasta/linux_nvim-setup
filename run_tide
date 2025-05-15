@@ -1,0 +1,50 @@
+#!/bin/bash
+
+# Step 1: Set path to packer.nvim
+
+PACKER_PATH="$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim"
+
+# Step 2: Check and install packer.nvim if not present
+
+if [ ! -d "$PACKER_PATH" ]; then
+  echo "[+] Installing packer.nvim..."
+  git clone --depth 1 https://github.com/wbthomason/packer.nvim "$PACKER_PATH"
+else
+  echo "[✓] packer.nvim already installed."
+fi
+
+
+# Step 3: (later we'll add checks for language-specific dependencies here)
+
+
+# Step 4: Prompt for language
+
+
+echo "Choose a language:"
+
+options=("cpp" "rust" "java" "exit")
+
+select lang in "${options[@]}"; do
+	case $lang in
+    "cpp"|"rust"|"java")
+      export NVIM_LANGUAGE="$lang"
+      break
+      ;;
+    "exit")
+      echo "Exiting."
+      exit 0
+      ;;
+    *)
+      echo "Invalid option."
+      ;;
+  esac
+done
+
+# Step 5: Run Neovim with custom config path
+
+NVIM_CONFIG="./nvim_main_config/init.lua"
+
+nvim -u "$NVIM_CONFIG"
+
+
+
