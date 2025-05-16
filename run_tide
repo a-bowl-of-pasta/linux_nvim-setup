@@ -31,7 +31,7 @@ fi
 #
 #
 
-compilerList=(g++ gcc python3 rustc ruby )
+compilerList=(g++ python3 rustc ruby )
 
 for compiler in ${compilerList[@]}; 
 do
@@ -53,6 +53,36 @@ done
 
 # ======================= menu
 #
+#
+
+languageOptions=("cpp" "python" "rust" "ruby")
+chosen=""
+
+# displays options
+#
+for lang in "${languageOptions[@]}"; do
+	echo "$lang"
+	echo
+done
+
+# picks options
+#
+while true; 
+do
+	read -p "your choice" chos
+	
+	case "$chos" in
+		"cpp" ) chosen="cpp";break;;
+		"python" ) chosen="python";break;;
+		"rust" ) chosen="rust";break;;
+		"ruby" ) chosen="ruby";break;;
+		*) echo "invalid option";;
+	esac
+done
+
+LanguagePath_open="./branch_out_folder/$chosen"
+
+# starts language-specific project folder
 #
 
 
