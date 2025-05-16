@@ -31,7 +31,7 @@ fi
 #
 #
 
-compilerList=(g++ python3 rustc ruby )
+compilerList=(gcc g++ python3 rustc ruby )
 
 for compiler in ${compilerList[@]}; 
 do
@@ -55,27 +55,35 @@ done
 #
 #
 
+# cleans the screen
+read -n 1 -s -r -p "Press any key to continue..."
+clear
+pwd
+#
+
 languageOptions=("cpp" "python" "rust" "ruby")
 chosen=""
 
 # displays options
 #
+
+echo "select one of the following ::"
 for lang in "${languageOptions[@]}"; do
-	echo "$lang"
-	echo
+	echo "--- $lang"
 done
 
 # picks options
 #
 while true; 
 do
-	read -p "your choice" chos
+	read -p "your choice :: " chos
 	
 	case "$chos" in
 		"cpp" ) chosen="cpp";break;;
 		"python" ) chosen="python";break;;
 		"rust" ) chosen="rust";break;;
 		"ruby" ) chosen="ruby";break;;
+		"exit") exit 0;; 
 		*) echo "invalid option";;
 	esac
 done
@@ -85,6 +93,7 @@ LanguagePath_open="./branch_out_folder/$chosen"
 # starts language-specific project folder
 #
 
+nvim "$LanguagePath_open" -u "./core_config/.config/init.lua"
 
 
-
+exit 0
